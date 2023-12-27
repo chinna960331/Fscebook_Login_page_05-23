@@ -4,16 +4,15 @@ import org.apache.commons.io.FileUtils;
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.interactions.Actions;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 
 import static Framework.Elements.Elements.*;
 
@@ -77,12 +76,20 @@ public class ZOMclass{
             }
         }
     }
-//    public void logoutaccount()throws Exception {
-//        driver.findElement(logo).click();
-//        driver.findE/lement(logout).click();
-//    }
+    public void logoutaccount()throws Exception {
+        Thread.sleep(2000);
+        WebElement img=driver.findElement(logo);
+        Actions Act= new Actions(driver);
+        Act.moveToElement(img).click(img).build().perform();
+        img.click();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.findElement(logout).click();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.findElement(By.xpath("//a[@role='button']")).click();
+        Thread.sleep(2000);
+    }
     public void Closebrowser()throws Exception{
-//        driver.close();
+        driver.close();
         log().info("By this close field the Web browser will closed");
     }
 }

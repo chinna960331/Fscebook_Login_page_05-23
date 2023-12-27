@@ -15,7 +15,7 @@ public class TC001 {
     public void TC001_FBPage()throws Exception {
         zom.OpenWebBrowser();
         zom.fbpage();
-//        zom.logoutaccount();
+        zom.logoutaccount();
     }
     @AfterMethod
     public void TC001_Close()throws Exception{
